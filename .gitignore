@@ -1,0 +1,9 @@
+.DS_Store
+.vscode/
+__pycache__/
+*.pyc
+.ipynb_checkpoints
+packages/api/ml/models/*
+!src/api/ml/models/.gitkeep
+packages/training/logs/
+packages/training/models/
