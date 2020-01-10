@@ -20,22 +20,24 @@ class Net(nn.Module):
 		keep_probab : Probability of retaining an activation node during dropout operation
 		vocab_size : Size of the vocabulary containing unique words
 		embed_dim (D) : Embedding dimension of word embeddings
-		--------
+		embedding_matrix : Embedding Matrix
+        --------
 		
 		"""
         output_class_num = args.class_num
         in_channels = 1
         out_channels = args.kernel_num
         kernel_heights = args.kernel_sizes
-        keep_probab = 0.1
+        keep_probab = 1.0 - args.dropout
         vocab_size = args.embed_num
         embed_dim = args.embed_dim
+        embedding_matrix = args.embedding_matrix
         
         # kernel_heights = [1,2,3,5]
         # out_channels = 36
         self.embedding = nn.Embedding(vocab_size, embed_dim)
-        # self.embedding.weight = nn.Parameter(torch.tensor(embedding_matrix, dtype=torch.float32))
-        # self.embedding.weight.requires_grad = False
+        self.embedding.weight = nn.Parameter(torch.tensor(embedding_matrix, dtype=torch.float32))
+        self.embedding.weight.requires_grad = False
         self.convs1 = nn.ModuleList([nn.Conv2d(in_channels, out_channels, (K, embed_dim)) for K in kernel_heights])
         self.dropout = nn.Dropout(keep_probab)
         self.fc1 = nn.Linear(len(kernel_heights)*out_channels, output_class_num)
