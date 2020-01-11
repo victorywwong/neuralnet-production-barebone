@@ -5,6 +5,7 @@ import random
 from tqdm import tqdm
 
 from flask import Blueprint, request, jsonify, Flask
+from flask_cors import CORS
 import torch
 import torch.nn.functional as F
 
@@ -15,6 +16,9 @@ from ml.utils import prediction_result
 
 app = Flask(__name__)
 api = Blueprint('api', __name__)
+
+# Making a Cross domain request
+CORS(api)
 
 # Load pytorch model for inference
 model_name = 'model_en.pth'

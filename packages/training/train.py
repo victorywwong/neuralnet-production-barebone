@@ -15,7 +15,7 @@ from src.data_loader import load_and_prec, load_glove, load_para
 from src.model import Net
 
 
-parser = argparse.ArgumentParser(description='CNN text classificer')
+parser = argparse.ArgumentParser(description='CNN text classifier')
 # learning
 parser.add_argument('-lr', type=float, default=0.001, help='initial learning rate [default: 0.001]')
 parser.add_argument('-epochs', type=int, default=5, help='number of epochs for train [default: 5]')
